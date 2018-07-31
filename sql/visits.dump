@@ -1,0 +1,7 @@
+INSERT INTO `visits` (account_num, visit_date, reason) VALUES
+(005, '2017-01-01', 'Rash'),
+(004, '2017-01-04', 'Vomiting'),
+(001, '2017-03-22', 'Loss of appetite'),
+(002, '2017-06-11', 'Hyperactive'),
+(003, '2017-09-30', 'Broken bone from fall'),
+(001, '2017-08-10', 'Swallowed golf ball');

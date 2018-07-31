@@ -1,0 +1,6 @@
+INSERT INTO `pets` (account_num, name, animal_type, gender, birthdate, owner_firstname, owner_lastname, owner_phone) VALUES
+(001, 'Saint', 'Dog', 'M', '2010-01-22', 'Loren', 'Alduino', 4155551235),
+(002, 'Pepper', 'Horse', 'F', '2009-04-11', 'Ekundayo', 'McKenzie', 5105766975),
+(003, 'Hobbit', 'Cat', 'F', '2015-05-03', 'Maria', 'Nakahara', 6508796811),
+(004, 'Muffin', 'Dog', 'M', '2015-07-16', 'Meredith', 'Biondo', 4153561549),
+(005, 'Mozzarella', 'Rabbit', 'F', '2017-02-09', 'Andile', 'McElligott', 5109874625);
