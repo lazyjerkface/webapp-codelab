@@ -15,4 +15,5 @@ git clone https://github.com/lazyjerkface/webapp-codelab.git
 
 ## Create the DB and tables.
 cd webapp-codelab/sql
+
 mysql -u root -p < pets.sql
