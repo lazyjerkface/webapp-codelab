@@ -7,9 +7,6 @@ sudo apt-get upgrade
 
 sudo apt-get dist-upgrade
 
-## Install bash autocompletion
-sudo apt-get install bash-completion
-
 ## Install mysql-server
 sudo apt-get install mysql-server
 
