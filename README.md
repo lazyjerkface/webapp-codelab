@@ -7,6 +7,8 @@ sudo apt-get update
 sudo apt-get upgrade
 
 sudo apt-get dist-upgrade
+
+sudo apt-get install build-essential libffi-dev python3.4-dev libssl-dev python-dev
 ```
 ## Install mysql-server
 ```
@@ -20,19 +22,26 @@ sudo apt-get install python3.4-venv
 ```
 git clone https://github.com/lazyjerkface/webapp-codelab.git
 ```
-## Create the DB and tables.
+## Create the DB and tables
 ```
 cd webapp-codelab/sql
 
 mysql -u root -p < pets.sql
 ```
-## Create a virtualenv environment
+## Create a virtualenv environment and start it
 ```
 python3 -m venv venv
+
+. venv/bin/activate
+
 ```
-## Install Flask
+## Upgrade setuptools
 ```
-pip3 install flask
+pip3 install setuptools --upgrade
+```
+## Install everything from requirements.txt
+```
+pip3 install -r requirements.txt
 ```
 ## Start the server!
 ```
