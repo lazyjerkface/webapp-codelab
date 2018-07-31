@@ -26,3 +26,17 @@ cd webapp-codelab/sql
 
 mysql -u root -p < pets.sql
 ```
+## Create a virtualenv environment
+```
+python3 -m venv venv
+```
+## Install Flask
+```
+pip3 install flask
+```
+## Start the server!
+```
+export FLASK_APP=main.py
+
+flask run --host=0.0.0.0
+```
