@@ -29,13 +29,11 @@ def db_connect():
     Error: mdb.Error. If there was a problem connecting to the DB.
   """
   user = 'root'
-  passwd = 'strawberry'
+  passwd = ''
   db = 'pets'
-  #host = 'mysql.onedogtwodogs.com'
   try:
     conn = mdb.connect(user=user,
                        passwd=passwd,
-                      # host=host,
                        db=db)
   except mdb.Error as e:
     raise Error(e)
