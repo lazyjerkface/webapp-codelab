@@ -1,4 +1,5 @@
 # Initial setup 
+Instructions here are designed for getting set up in Codeanywhere.
 
 ## Update packages and upgrade distro
 ```
@@ -28,6 +29,7 @@ cd webapp-codelab/sql
 
 mysql -u root -p < pets.sql
 ```
+After this, go into the sql folder and take a look at the README.
 ## Create a virtualenv environment and start it
 ```
 python3 -m venv venv
