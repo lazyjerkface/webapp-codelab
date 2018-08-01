@@ -35,7 +35,6 @@ After this, go into the sql folder and take a look at the README.
 python3 -m venv venv
 
 . venv/bin/activate
-
 ```
 ## Upgrade setuptools
 ```
