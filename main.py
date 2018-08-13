@@ -1,3 +1,5 @@
+# -*- coding: utf-8 -*-
+
 import datetime
 import pymysql as mdb
 import sys
