@@ -1,5 +1,6 @@
-# Initial setup 
-Instructions here are designed for getting set up in Codeanywhere.
+# Setup instructions for your environment. 
+Instructions here are designed for getting set up in Codeanywhere. Below updates
+and installs the necessary libraries.
 
 ## Update packages and upgrade distro
 ```
@@ -52,3 +53,6 @@ export FLASK_DEBUG=1
 
 flask run --host=0.0.0.0
 ```
+
+# Exercises
+Open main.py to view the code and for exercises for this codelab.

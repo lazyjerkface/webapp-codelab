@@ -11,6 +11,10 @@ from flask import render_template
 
 app = Flask(__name__)
 
+# Constants
+# Exercise 1a
+HOSPITAL_NAME = 'Strawberry Hill'
+
 
 class Error(Exception):
   """The base error class."""
@@ -58,9 +62,53 @@ def close_db(error):
     g.db_conn.close()
 
 
+def get_all_patients():
+  """Returns a list of lists containing all patient info."""
+  query = ('SELECT account_num, name, animal_type, gender, birthdate,'
+           'owner_firstname, owner_lastname, owner_phone from pets')
+  cur = get_db().cursor()
+  cur.execute(query)
+  patient_result_list = []
+  for (account_num, name, animal_type, gender, birthdate, owner_firstname,
+       owner_lastname, owner_phone) in cur.fetchall():
+    # Ensure non-string values are converted to strings.
+    patient_result_list.append([str(account_num), name, animal_type, gender,
+                                birthdate.strftime('%Y-%m-%d'), owner_firstname,
+                                owner_lastname, str(owner_phone)])
+  return patient_result_list
+
+
+# When a user visits the main page, this function returns and displays
+# the content. Let's modify it!
+# Exercise 1:
+# a) At the top of the page, look for the declaration of HOSPITAL_NAME.
+#    Let's update it to the name of your hospital.
+#    When you're done, save the file, and refresh your hosptial's home page.
+# b) The list of patients is... hard on the eyes. Instead of <p> tags,
+#    use a <table> and wrap the rows in <tr> tags with each field wrapped
+#    with <td> tags.  Don't forget the header row!
+#    HINT:
+#      <tr>
+#        <td>1</td>
+#        <td>Saint</td>
+#        ...
+#      </tr>
+#      ...
+#      <tr>
+#        ...
+#      </tr>
 @app.route('/')
-def hello_world():
-  return 'Hello, World!'
+def main_page():
+  page_content = """
+  <div><h1>%s</h1></div>
+  <p><b>Patients:</b></p>
+  """.strip() % HOSPITAL_NAME
+  for patient_list in get_all_patients():
+    # Exercise 1b
+    page_content += '<p>%s</p>' % (', '.join(patient_list))
+  return page_content
+  # (Optional): Implement the function call below.
+  # eturn render_template('main.html')
 
 
 if __name__ == '__main__':    
