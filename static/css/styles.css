@@ -32,6 +32,10 @@
   background-color: #f2f2f2;
 }
 
+.card-body table th {
+  padding: 5px;
+}
+
 .card-header {
   font-size: 3em;
   font-weight: bold;
