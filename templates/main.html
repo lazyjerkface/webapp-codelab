@@ -19,7 +19,7 @@
         </div>
         <div class="card-body">
           {% if patient_list %}
-          <table>
+          <table id="patient-table">
             <tr>
               <th>Account Number</th>
               <th>Patient Name</th>
@@ -31,7 +31,7 @@
               <th>Owner's Phone Number</th>
             </tr>
               {% for row in patient_list %}
-                <tr>
+                <tr id="{{ row[0] }}" class="patient-row">
                   {% for item in row %}
                     <td>{{ item }}</td>
                   {% endfor %}
@@ -44,5 +44,6 @@
         </div>
       </div>
     </div>
+    <script type="text/javascript" src="{{ url_for('static', filename='js/app.js') }}"></script>
   </body>
 </html>
