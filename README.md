@@ -12,13 +12,9 @@ sudo apt-get dist-upgrade
 
 sudo apt-get install build-essential libffi-dev python3.4-dev libssl-dev python-dev
 ```
-## Install mysql-server
+## Install mysql-server and python3-venv
 ```
-sudo apt-get install mysql-server
-```
-## Install python3-venv
-```
-sudo apt-get install python3.4-venv
+sudo apt-get install mysql-server python3.4-venv
 ```
 ## Clone the webapp-codelab
 ```
@@ -53,6 +49,7 @@ export FLASK_DEBUG=1
 
 flask run --host=0.0.0.0
 ```
+Note: You may encounter an encoding error but the failure message should tell you how to resolve the issue.
 
 # Exercises
 Open main.py to view the code and for exercises for this codelab.
