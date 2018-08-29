@@ -32,33 +32,59 @@ HOSPITAL_NAME = 'Strawberry Hill'
 #        ...
 #      </tr>
 # c) Implement the render_template method below.
+#    HINT: http://flask.pocoo.org/docs/1.0/quickstart/#rendering-templates
+# d) (Optional): Look at static/css/styles.css, change some values,
+#    and refresh the page.
 @app.route('/')
 def main_page():
+  """This is the main page."""
+
   page_content = """
   <div><h1>%s</h1></div>
   <p><b>Patients:</b></p>
   """.strip() % HOSPITAL_NAME
-  #for patient_list in get_all_patients():
+  for patient_list in get_all_patients():
     # Exercise 1b
-    #page_content += '<p>%s</p>' % (', '.join(patient_list))
-  #return page_content
+    page_content += '<p>%s</p>' % (', '.join(patient_list))
+  return page_content
   # Exercise 1c
-  return render_template('main.html',
-                         hospital_name=HOSPITAL_NAME,
-                         patient_list=get_all_patients())
+  #return render_template('main.html')
 
-# This page displays information about an individual patient.
+
 # Exercise 2:
 #  a) Implement this method by redirecting users when clicking on a table row.
 #     HINT: Look in static/js.
 #  b) Create an HTML template and display it using the render_template method.
 #  c) Display all the previous visits this patient has made.
-#     HINT: see the get_visits_for_patient method.
+#     HINT: see the get_patient_info method.
 #  d) (Optional): Create a base template that all other templates can inherit.
 #     HINT: http://flask.pocoo.org/docs/1.0/patterns/templateinheritance/
 @app.route('/view/<account_num>')
 def view_patient(account_num):
-  return ', '.join(get_patient(account_num) or ['Nothing'])
+  """This page displays information about an individual patient."""
+
+  page_content = ''
+  visits_list = get_patient_info(account_num, table='visits')
+  for visit in visits_list:
+    page_content += '<p>' + ', '.join(visit) + '</p>'
+  return page_content
+
+
+# Exercise 3
+#  a) Implement this method which adds a visit to the visit table
+#     for a patient.
+#  b) Think about the use-case and design.
+#     Where does the user add in the visit info? How does the user get there?
+#     Will data be submitted via form? AJAX call?
+# There is a lot to consider, so take it one step at a time.
+def add_visit(account_num):
+  pass
+
+
+# Exercise 4 (Optional)
+# Implement methods allowing a user to edit existing data.
+# For example, updating owner info in the pets table or
+# updating the reason in the visits table.
 
 
 class Error(Exception):
@@ -66,7 +92,12 @@ class Error(Exception):
 
 
 def log_to_console(message):
-  """This is just a debug method."""
+  """This is just a debug method.
+
+  Usage:
+    log_to_console('view data or debug info in the console')
+  """
+
   fmt = '[%s]: %s' % (datetime.datetime.now(), message)
   print(fmt, file=sys.stderr)
 
@@ -79,6 +110,7 @@ def db_connect():
   Raises:
     Error: mdb.Error. If there was a problem connecting to the DB.
   """
+
   user = 'root'
   passwd = ''
   db = 'pets'
@@ -123,8 +155,8 @@ def get_all_patients():
   return patient_result_list
 
 
-def get_patient(account_num):
-  query = 'SELECT * from pets WHERE account_num = %s' % (account_num,)
+def get_patient_info(account_num, table='pets'):
+  query = 'SELECT * from %s WHERE account_num = %s' % (table, account_num,)
   cur = get_db().cursor()
   cur.execute(query)
   result = cur.fetchall()
@@ -132,17 +164,17 @@ def get_patient(account_num):
   if not result:
     return patient_info
   for row in result:
-   for entry in row:
+    row_info = []
+    for entry in row:
       formatted_entry = entry
       if isinstance(entry, int):
         formatted_entry = str(entry)
       elif isinstance(entry, datetime.date):
         formatted_entry = entry.strftime('%y-%m-%d')
-      patient_info.append(formatted_entry)
+      row_info.append(formatted_entry)
+    # Strip the ID field
+    patient_info.append(row_info[1:])
   return patient_info
-
-def get_visits_for_patient(account_num):
-  pass
 
 
 if __name__ == '__main__':    
