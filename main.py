@@ -38,7 +38,6 @@ HOSPITAL_NAME = 'Strawberry Hill'
 @app.route('/')
 def main_page():
   """This is the main page."""
-
   page_content = """
   <div><h1>%s</h1></div>
   <p><b>Patients:</b></p>
@@ -62,7 +61,6 @@ def main_page():
 @app.route('/view/<account_num>')
 def view_patient(account_num):
   """This page displays information about an individual patient."""
-
   page_content = ''
   visits_list = get_patient_info(account_num, table='visits')
   for visit in visits_list:
@@ -97,7 +95,6 @@ def log_to_console(message):
   Usage:
     log_to_console('view data or debug info in the console')
   """
-
   fmt = '[%s]: %s' % (datetime.datetime.now(), message)
   print(fmt, file=sys.stderr)
 
@@ -110,7 +107,6 @@ def db_connect():
   Raises:
     Error: mdb.Error. If there was a problem connecting to the DB.
   """
-
   user = 'root'
   passwd = ''
   db = 'pets'
@@ -156,6 +152,14 @@ def get_all_patients():
 
 
 def get_patient_info(account_num, table='pets'):
+  """Returns a list of lists containing info for account_num.
+  
+  account_num: The account number of the patient.
+  table: The table_name to query. Default is pets.
+  
+  Returns:
+  patient_info: A list of lists.
+  """
   query = 'SELECT * from %s WHERE account_num = %s' % (table, account_num,)
   cur = get_db().cursor()
   cur.execute(query)
